@@ -10,7 +10,7 @@
 locale                   : "zh-CN"
 title                    : "A Dream Left"
 title_separator          : "-"
-name                     : &name "胡中山"
+name                     : &name "ADL"
 description              : &description "金融学专业的一名小学生"
 url                      : https://adreamleft.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -22,7 +22,7 @@ repository               : "ADreamLeft/adreamleft.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "胡中山"
   pronouns         : "he/him" # example: "she/her"  
   bio              : "以后再来探索吧"
   location         : "北京 中国"
