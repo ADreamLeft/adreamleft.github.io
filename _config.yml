@@ -24,7 +24,7 @@ author:
   avatar           : "profile.png"
   name             : "胡中山"
   pronouns         : "he/him" # example: "she/her"  
-  bio              : "以后再来探索吧"
+  bio              : "哇咔咔～感谢造访"
   location         : "北京 中国"
   employer         : "北京大学（PKU）"
   uri              : # URL
@@ -250,6 +250,15 @@ defaults:
   - scope:
       path: ""
       type: teaching
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _publications
+  - scope:
+      path: ""
+      type: publications
     values:
       layout: single
       author_profile: true
