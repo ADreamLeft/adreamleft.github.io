@@ -66,13 +66,13 @@ author:
   steam            : # Username
   telegram         : # URL
   tumblr           : # Username
-  twitter          : "我剩下一个梦" # Username for X / Twitter
+  twitter          : 我剩下一个梦 # Username for X / Twitter
   vine             : # Username
   weibo            : # Username
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : "我剩下一个梦" # Username
+  zhihu            : 我剩下一个梦 # Username
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
