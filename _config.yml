@@ -26,7 +26,7 @@ author:
   pronouns         : "he/him" # example: "she/her"  
   bio              : "哇咔咔～感谢造访"
   location         : "北京 中国"
-  employer         : "北京大学（PKU）"
+  employer         : "[北京大学（PKU）](https://www.pku.edu.cn)"
   uri              : # URL
   email            : "zhongshanhu@stu.pku.edu.cn" 
 
@@ -215,13 +215,7 @@ collections:
   teaching:
     output: true
     permalink: /:collection/:path/
-  publications:
-    output: true
-    permalink: /:collection/:path/
   portfolio:
-    output: true
-    permalink: /:collection/:path/
-  tricks:
     output: true
     permalink: /:collection/:path/
   notes&books:
@@ -278,14 +272,6 @@ defaults:
       layout: talk
       author_profile: true
       share: true
-  - scope:
-      path: ""
-      type: tricks
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
   - scope:
       path: ""
       type: notes&books
