@@ -26,9 +26,7 @@ author:
   pronouns: "he/him"  # example: "she/her"
   bio: "哇咔咔～感谢造访"
   location: "北京 中国"
-  employer:
-    name: "北京大学（PKU）"
-    url: "https://www.pku.edu.cn"
+  employer: "北京大学"
   uri:  # URL (optional)
   email: "zhongshanhu@stu.pku.edu.cn"
 
@@ -68,13 +66,13 @@ author:
   steam            : # Username
   telegram         : # URL
   tumblr           : # Username
-  twitter          : 我剩下一个梦 # Username for X / Twitter
+  twitter          : ADreamLeft # Username for X / Twitter
   vine             : # Username
   weibo            : # Username
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : 我剩下一个梦 # Username
+  zhihu            : 36-82-61-77 # Username
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
