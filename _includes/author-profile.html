@@ -30,7 +30,7 @@
       {% if author.employer %}
         <div class="author_desktop">
           <i class="fas fa-fw fa-building-columns icon-pad-right" aria-hidden="true"></i>
-          {{ author.employer | markdownify }}
+          <a href="{{ author.employer.url }}" target="_blank">{{ author.employer.name }}</a>
         </div>
       {% endif %}
       {% if author.uri %}

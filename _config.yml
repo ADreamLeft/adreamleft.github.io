@@ -21,14 +21,16 @@ repository               : "ADreamLeft/adreamleft.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
-  name             : "胡中山"
-  pronouns         : "he/him" # example: "she/her"  
-  bio              : "哇咔咔～感谢造访"
-  location         : "北京 中国"
-  employer         : "[北京大学（PKU）](https://www.pku.edu.cn)"
-  uri              : # URL
-  email            : "zhongshanhu@stu.pku.edu.cn" 
+  avatar: "profile.png"
+  name: "胡中山"
+  pronouns: "he/him"  # example: "she/her"
+  bio: "哇咔咔～感谢造访"
+  location: "北京 中国"
+  employer:
+    name: "北京大学（PKU）"
+    url: "https://www.pku.edu.cn"
+  uri:  # URL (optional)
+  email: "zhongshanhu@stu.pku.edu.cn"
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
