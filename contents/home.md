@@ -6,7 +6,7 @@ Email: zhongshanhu@stu.pku.edu.cn
 
 #### Education
 
-B.A. in Finance, School of Economics, Peking University, 2022–2026 (expected)
+B.A. in Finance, School of Economics, Peking University, 2022–2026 (expected)\
 Second B.Sc. in Mathematics, School of Mathematical Sciences, Peking University
 
 #### Research Interests
