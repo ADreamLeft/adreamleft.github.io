@@ -104,10 +104,10 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content -->
     <div class="container px-5 my-5">
-        <div id="markdown-content" class="markdown-body"></div>
+        <div id="markdown-content" class="markdown-body avoid-toc" style="padding-top: 80px;"></div>
     </div>
 
     <div id="toc-container" style="
@@ -321,54 +321,6 @@
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
-
-        #floating-toc {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            max-height: 60vh;
-            overflow-y: auto;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 1em;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            font-family: "Kanit", sans-serif;
-        }
-
-        #floating-toc summary {
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        #floating-toc ul {
-            list-style-type: none;
-            padding-left: 1em;
-            margin: 0;
-        }
-
-        #floating-toc li {
-            margin: 0.2em 0;
-        }
-
-        #floating-toc a {
-            text-decoration: none;
-            color: #007bff;
-            font-size: 0.95rem;
-        }
-
-        #floating-toc a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            #floating-toc {
-                display: none;
-            }
-        }
-
     </style>
 
 </body>

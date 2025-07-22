@@ -103,6 +103,13 @@ section .main-body{
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
+#markdown-content.avoid-toc {
+    max-width: 70%;
+    margin-right: auto;
+    padding-right: 2rem; /* 增加右边空间防止紧贴 */
+}
+
+
 @media screen and (max-width: 991px) {
     #avatar {
         margin: 0;
