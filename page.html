@@ -161,7 +161,6 @@
                 .then(md => {
                     container.innerHTML = marked.parse(md);
                     MathJax.typeset(); // Re-render MathJax
-                    generateCollapsibleTOC();
                 })
                 .catch(err => {
                     container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
