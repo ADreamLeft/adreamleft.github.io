@@ -109,6 +109,42 @@ section .main-body{
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
+#toc-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 240px;
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+    z-index: 1000;
+}
+
+#toc-container .toc-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.toc-h2 > span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.toc-sublist {
+    margin-left: 1rem;
+    list-style: disc;
+}
 
 
 
