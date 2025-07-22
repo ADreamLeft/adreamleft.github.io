@@ -107,7 +107,7 @@
 
     <!-- Main Content -->
     <div class="container px-5 my-5">
-        <div id="markdown-content" class="markdown-body avoid-toc" style="padding-top: 80px;"></div>
+        <div id="markdown-content" class="markdown-body" style="padding-top: 80px;"></div>
     </div>
 
     <div id="toc-container" style="
@@ -166,68 +166,7 @@
                 .catch(err => {
                     container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
                 });
-        };   
-        function generateCollapsibleTOC() {
-            const tocContainer = document.createElement('div');
-            tocContainer.id = 'toc-container';
-            tocContainer.innerHTML = '<div class="toc-title">📚 目录</div>';
-            
-            const tocList = document.createElement('ul');
-            tocList.className = 'toc-list';
-
-            const headers = document.querySelectorAll('.markdown-body h2, .markdown-body h3');
-
-            let currentH2Item = null;
-
-            headers.forEach(header => {
-                const text = header.innerText;
-                const id = text.replace(/\s+/g, '-').toLowerCase();
-                header.id = id;
-
-                if (header.tagName === 'H2') {
-                    // 创建 H2 主项
-                    const li = document.createElement('li');
-                    li.className = 'toc-h2';
-
-                    const span = document.createElement('span');
-                    span.textContent = text;
-                    span.className = 'toc-collapsible';
-                    span.style.cursor = 'pointer';
-
-                    const subList = document.createElement('ul');
-                    subList.className = 'toc-sublist';
-                    subList.style.display = 'none'; // 初始折叠
-
-                    span.onclick = () => {
-                        const visible = subList.style.display === 'block';
-                        subList.style.display = visible ? 'none' : 'block';
-                    };
-
-                    span.onclick(); // 默认展开第一个
-
-                    const link = document.createElement('a');
-                    link.href = `#${id}`;
-                    link.textContent = text;
-
-                    li.appendChild(span);
-                    li.appendChild(subList);
-                    tocList.appendChild(li);
-                    currentH2Item = subList;
-                }
-
-                if (header.tagName === 'H3' && currentH2Item) {
-                    const subLi = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = `#${id}`;
-                    link.textContent = text;
-                    subLi.appendChild(link);
-                    currentH2Item.appendChild(subLi);
-                }
-            });
-
-            tocContainer.appendChild(tocList);
-            document.body.appendChild(tocContainer);
-        }
+        };
     </script>
 
     <!-- Optional: GitHub-style markdown CSS -->
