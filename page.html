@@ -166,134 +166,68 @@
                 .catch(err => {
                     container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
                 });
-        function generateCollapsibleTOC() {
-            const tocContainer = document.getElementById('toc');
-            tocContainer.innerHTML = '';
 
-            const headings = container.querySelectorAll('h1, h2, h3');
-            if (headings.length === 0) {
-                tocContainer.innerHTML = '<p>无目录内容</p>';
-                return;
-            }
+            function generateCollapsibleTOC() {
+                const tocContainer = document.createElement('div');
+                tocContainer.id = 'toc-container';
+                tocContainer.innerHTML = '<div class="toc-title">📚 目录</div>';
+                
+                const tocList = document.createElement('ul');
+                tocList.className = 'toc-list';
 
-            // 给标题添加id
-            headings.forEach((heading, idx) => {
-                if (!heading.id) {
-                    heading.id = 'heading-' + idx;
-                }
-            });
+                const headers = document.querySelectorAll('.markdown-body h2, .markdown-body h3');
 
-            // 先构建树状目录数据结构 [{level, text, id, children: []}]
-            let tocTree = [];
-            let currentH1 = null;
-            let currentH2 = null;
+                let currentH2Item = null;
 
-            headings.forEach(heading => {
-                const level = parseInt(heading.tagName.substring(1));
-                const node = {
-                    level,
-                    text: heading.textContent,
-                    id: heading.id,
-                    children: []
-                };
+                headers.forEach(header => {
+                    const text = header.innerText;
+                    const id = text.replace(/\s+/g, '-').toLowerCase();
+                    header.id = id;
 
-                if (level === 1) {
-                    tocTree.push(node);
-                    currentH1 = node;
-                    currentH2 = null;
-                } else if (level === 2) {
-                    if (currentH1) {
-                        currentH1.children.push(node);
-                        currentH2 = node;
-                    } else {
-                        tocTree.push(node); // 没有h1时直接放根目录
-                    }
-                } else if (level === 3) {
-                    if (currentH2) {
-                        currentH2.children.push(node);
-                    } else if (currentH1) {
-                        currentH1.children.push(node);
-                    } else {
-                        tocTree.push(node);
-                    }
-                }
-            });
+                    if (header.tagName === 'H2') {
+                        // 创建 H2 主项
+                        const li = document.createElement('li');
+                        li.className = 'toc-h2';
 
-            // 递归生成折叠目录 HTML
-            function createList(nodes) {
-                const ul = document.createElement('ul');
-                ul.style.listStyle = 'none';
-                ul.style.paddingLeft = '10px';
-                ul.style.marginBottom = '8px';
+                        const span = document.createElement('span');
+                        span.textContent = text;
+                        span.className = 'toc-collapsible';
+                        span.style.cursor = 'pointer';
 
-                nodes.forEach(node => {
-                    const li = document.createElement('li');
-                    li.style.marginBottom = '4px';
+                        const subList = document.createElement('ul');
+                        subList.className = 'toc-sublist';
+                        subList.style.display = 'none'; // 初始折叠
 
-                    const a = document.createElement('a');
-                    a.href = '#' + node.id;
-                    a.textContent = node.text;
-                    a.style.color = '#007bff';
-                    a.style.textDecoration = 'none';
-                    a.style.cursor = 'pointer';
-                    a.style.display = 'inline-block';
-                    a.style.verticalAlign = 'middle';
-                    a.style.userSelect = 'none';
-
-                    a.onmouseover = () => { a.style.textDecoration = 'underline'; };
-                    a.onmouseout = () => { a.style.textDecoration = 'none'; };
-
-                    // 如果有子节点，添加可折叠箭头
-                    if (node.children.length > 0) {
-                        const toggleBtn = document.createElement('span');
-                        toggleBtn.textContent = '▶'; // 右箭头，表示折叠状态
-                        toggleBtn.style.cursor = 'pointer';
-                        toggleBtn.style.marginRight = '6px';
-                        toggleBtn.style.userSelect = 'none';
-                        toggleBtn.style.display = 'inline-block';
-                        toggleBtn.style.transition = 'transform 0.2s ease';
-
-                        // 点击箭头切换展开/折叠
-                        toggleBtn.onclick = (e) => {
-                            e.stopPropagation();
-                            if (sublist.style.display === 'none') {
-                                sublist.style.display = 'block';
-                                toggleBtn.textContent = '▼'; // 下箭头，表示展开状态
-                            } else {
-                                sublist.style.display = 'none';
-                                toggleBtn.textContent = '▶';
-                            }
+                        span.onclick = () => {
+                            const visible = subList.style.display === 'block';
+                            subList.style.display = visible ? 'none' : 'block';
                         };
 
-                        li.appendChild(toggleBtn);
-                    } else {
-                        // 为没有子节点的标题留点缩进对齐
-                        const spacer = document.createElement('span');
-                        spacer.style.display = 'inline-block';
-                        spacer.style.width = '14px';
-                        spacer.style.marginRight = '6px';
-                        li.appendChild(spacer);
+                        span.onclick(); // 默认展开第一个
+
+                        const link = document.createElement('a');
+                        link.href = `#${id}`;
+                        link.textContent = text;
+
+                        li.appendChild(span);
+                        li.appendChild(subList);
+                        tocList.appendChild(li);
+                        currentH2Item = subList;
                     }
 
-                    li.appendChild(a);
-
-                    // 递归子节点
-                    if (node.children.length > 0) {
-                        const sublist = createList(node.children);
-                        sublist.style.display = 'none'; // 默认折叠
-                        sublist.style.marginTop = '4px';
-                        li.appendChild(sublist);
+                    if (header.tagName === 'H3' && currentH2Item) {
+                        const subLi = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `#${id}`;
+                        link.textContent = text;
+                        subLi.appendChild(link);
+                        currentH2Item.appendChild(subLi);
                     }
-
-                    ul.appendChild(li);
                 });
 
-                return ul;
+                tocContainer.appendChild(tocList);
+                document.body.appendChild(tocContainer);
             }
-
-            tocContainer.appendChild(createList(tocTree));
-        }
-
         }
     </script>
 
