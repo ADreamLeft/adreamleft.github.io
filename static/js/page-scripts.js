@@ -40,13 +40,13 @@ window.onload = function () {
             }
             tocList.innerHTML = '';
 
-            const headers = container.querySelectorAll('h2, h3');
+            const headers = container.querySelectorAll('h1, h2');
             headers.forEach((header, index) => {
                 if (!header.id) {
                     header.id = 'header-' + index;
                 }
                 const li = document.createElement('li');
-                li.style.marginLeft = header.tagName === 'H3' ? '20px' : '0px';
+                li.style.marginLeft = header.tagName === 'H2' ? '20px' : '0px';
 
                 const a = document.createElement('a');
                 a.href = '#' + header.id;
