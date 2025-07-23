@@ -2,14 +2,28 @@ window.onload = function () {
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file');
     const container = document.getElementById("markdown-content");
-    const tocList = document.getElementById("toc-list");
     const pageTitle = document.getElementById("page-title");
+    const tocList = document.getElementById("toc-list");
 
     if (!file) {
         container.innerHTML = "<p>No markdown file specified. Use <code>?file=path/to/file.md</code> in the URL.</p>";
         return;
     }
 
+    // 从 file 字符串中提取文件名（去掉路径和后缀）
+    const filename = file.split('/').pop();  // 取最后一部分
+    const titleText = filename.replace(/\.md$/i, '');  // 去掉.md后缀（不区分大小写）
+
+    // 设置居中标题
+    if (pageTitle) {
+        pageTitle.textContent = titleText;
+        pageTitle.style.textAlign = "center";
+        pageTitle.style.marginTop = "80px";
+        pageTitle.style.marginBottom = "40px";
+        pageTitle.style.fontWeight = "700";
+        pageTitle.style.fontSize = "2rem";
+    }
+    
     fetch(file)
         .then(response => {
             if (!response.ok) throw new Error("Markdown file not found.");
