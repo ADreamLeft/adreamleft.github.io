@@ -23,59 +23,40 @@ window.onload = function () {
         pageTitle.style.fontWeight = "700";
         pageTitle.style.fontSize = "2rem";
     }
-    
+
     fetch(file)
         .then(response => {
             if (!response.ok) throw new Error("Markdown file not found.");
             return response.text();
         })
         .then(md => {
-            // 先把 markdown 转成 html
             container.innerHTML = marked.parse(md);
-
             MathJax.typeset();
 
-            // 给所有 h1,h2,h3 添加 id，方便跳转
-            const headers = container.querySelectorAll('h1, h2, h3');
-            if (headers.length === 0) {
-                tocList.innerHTML = '<li>无目录项</li>';
+            // 生成目录
+            if (!tocList) {
+                console.error("目录容器 toc-list 找不到");
                 return;
             }
+            tocList.innerHTML = '';
 
-            headers.forEach(header => {
+            const headers = container.querySelectorAll('h2, h3');
+            headers.forEach((header, index) => {
                 if (!header.id) {
-                    header.id = header.textContent.trim()
-                        .toLowerCase()
-                        .replace(/\s+/g, '-')
-                        .replace(/[^\w\-]/g, '');
+                    header.id = 'header-' + index;
                 }
-            });
-
-            // 设置页面标题，取第一个h1文本，如果没有就用文件名
-            const firstH1 = container.querySelector('h1');
-            if (firstH1) {
-                pageTitle.textContent = firstH1.textContent;
-                firstH1.style.display = 'none';  // 避免标题重复显示
-            } else {
-                pageTitle.textContent = file;
-            }
-
-            // 构建目录
-            tocList.innerHTML = ''; // 先清空
-            headers.forEach(header => {
                 const li = document.createElement('li');
-                // 根据标题等级缩进，h1无缩进，h2缩进15px，h3缩进30px
-                li.style.marginLeft = (parseInt(header.tagName[1]) - 1) * 15 + 'px';
+                li.style.marginLeft = header.tagName === 'H3' ? '20px' : '0px';
 
                 const a = document.createElement('a');
                 a.href = '#' + header.id;
                 a.textContent = header.textContent;
+                a.style.cursor = 'pointer';
+                a.style.color = '#007bff';
                 a.style.textDecoration = 'none';
-                a.style.color = '#0d6efd';
 
-                // 鼠标悬停样式
-                a.addEventListener('mouseenter', () => { a.style.textDecoration = 'underline'; });
-                a.addEventListener('mouseleave', () => { a.style.textDecoration = 'none'; });
+                a.addEventListener('mouseover', () => { a.style.textDecoration = 'underline'; });
+                a.addEventListener('mouseout', () => { a.style.textDecoration = 'none'; });
 
                 li.appendChild(a);
                 tocList.appendChild(li);
@@ -83,6 +64,6 @@ window.onload = function () {
         })
         .catch(err => {
             container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
-            tocList.innerHTML = '<li>加载目录失败</li>';
+            tocList.innerHTML = `<p style="color:red;">加载目录失败</p>`;
         });
 };
