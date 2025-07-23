@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Academic Webpage" />
-    <meta name="author" content="senli1073" />
+    <meta name="author" content="ADL" />
     <title id="title"></title>
 
     <!-- Icon -->
@@ -105,63 +105,21 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container px-5 my-5">
-        <div id="markdown-content" class="markdown-body" style="padding-top: 80px;"></div>
+        <div class="row">
+            <!-- Left: Markdown Content -->
+            <div class="col-lg-8">
+                <div id="markdown-content" class="markdown-body" style="padding-top: 80px;"></div>
+            </div>
+
+            <!-- Right: Empty Placeholder for TOC -->
+            <div class="col-lg-4 d-none d-lg-block">
+                <!-- You can add your Table of Contents here in the future -->
+            </div>
+        </div>
     </div>
 
-    <!-- JS: Load and Render Markdown -->
-    <script>
-        window.onload = function () {
-            const params = new URLSearchParams(window.location.search);
-            const file = params.get('file');
-            const container = document.getElementById("markdown-content");
-
-            if (!file) {
-                container.innerHTML = "<p>No markdown file specified. Use <code>?file=path/to/file.md</code> in the URL.</p>";
-                return;
-            }
-
-            fetch(file)
-                .then(response => {
-                    if (!response.ok) throw new Error("Markdown file not found.");
-                    return response.text();
-                })
-                .then(md => {
-                    container.innerHTML = marked.parse(md);
-                    MathJax.typeset(); // Re-render MathJax
-                })
-                .catch(err => {
-                    container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
-                });
-        };
-    </script>
-
-    <!-- Optional: GitHub-style markdown CSS -->
-    <style>
-        .markdown-body {
-            font-family: "Kanit", sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .markdown-body pre {
-            background: #f5f5f5;
-            padding: 1rem;
-            overflow-x: auto;
-        }
-
-        .markdown-body code {
-            background: #eee;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-        }
-
-        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-    </style>
-
+    <script type="text/javascript" src="static/js/marked.min.js"></script>
+    <script type="text/javascript" src="static/js/page-scripts.js"></script>
 </body>
 </html>
