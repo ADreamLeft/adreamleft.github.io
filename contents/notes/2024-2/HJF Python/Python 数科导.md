@@ -85,7 +85,7 @@
 ### 2.8 列表生成式
 
 - 嵌套的列表生成式
-- ![嵌套的列表生成式](../Attachments/嵌套的列表生成式.png)
+- ![嵌套的列表生成式](contents/notes/2024-2/Attachments/嵌套的列表生成式.png)
 
 ### 2.9 高阶函数
 
@@ -157,7 +157,7 @@
 
 - open() 函数用于打开文件，返回一个文件对象，完整定义是 `open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)`。
 - mode 可选值
-- ![file mode](../Attachments/file mode.png)
+- ![file mode](contents/notes/2024-2/Attachments/file mode.png)
 - readlines() 方法读取文件所有行，返回一个列表；read() 方法读取整个文件内容，返回一个字符串，可以制定读入的字节数。
 - 但是 open() 会保留行尾换行，如果需要去掉行尾换行符，可以使用 `strip()` 方法。
 - 文件写入：write()方法
