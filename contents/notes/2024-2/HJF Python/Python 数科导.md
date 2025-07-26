@@ -85,7 +85,7 @@
 ### 2.8 列表生成式
 
 - 嵌套的列表生成式
-- ![[嵌套的列表生成式.png]]
+- ![嵌套的列表生成式](../Attachments/嵌套的列表生成式.png)
 
 ### 2.9 高阶函数
 
@@ -157,7 +157,7 @@
 
 - open() 函数用于打开文件，返回一个文件对象，完整定义是 `open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)`。
 - mode 可选值
-- ![[file mode.png]]
+- ![file mode](../Attachments/file mode.png)
 - readlines() 方法读取文件所有行，返回一个列表；read() 方法读取整个文件内容，返回一个字符串，可以制定读入的字节数。
 - 但是 open() 会保留行尾换行，如果需要去掉行尾换行符，可以使用 `strip()` 方法。
 - 文件写入：write()方法
@@ -702,6 +702,7 @@ $$
     3. 重复迭代直到模块度不再提高。
 - Girvan-Newman 算法：基于边介数的算法，通过逐步移除边来发现社区。
   - 边介数：
+
     $$
     B(e)=\sum\limits_{s \neq t \neq e} \frac{\sigma_{st}(e)}{\sigma_{st}}
     $$
@@ -761,12 +762,14 @@ $$
 - **目标**：通过尺度空间（Scale Space）检测图像中具有尺度不变性的关键点。
 - **方法**：
   - **高斯拉普拉斯变换（LOG）**：通过计算图像的拉普拉斯算子与高斯核的卷积（即LOG），检测图像中的“Blob”（斑点）特征。公式为：
+
     $$
     L_{xx}(\sigma) + L_{yy}(\sigma)
     $$
 
     其中，$\sigma$ 表示高斯核的尺度参数。
   - **高斯差（DOG）**：用不同尺度的高斯核差分近似LOG，计算效率更高。公式为：
+
     $$
     DOG = G(\sigma_1) * I - G(\sigma_2) * I \quad (\sigma_1 > \sigma_2)
     $$
