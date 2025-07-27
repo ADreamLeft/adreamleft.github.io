@@ -1,4 +1,9 @@
 window.onload = function () {
+    marked.setOptions({
+        gfm: false,
+        smartypants: false,
+    });
+
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file');
     const container = document.getElementById("markdown-content");
@@ -30,10 +35,6 @@ window.onload = function () {
             return response.text();
         })
         .then(md => {
-            marked.setOptions({
-            gfm: false,
-            smartypants: false,
-            });
             container.innerHTML = marked.parse(md);
             MathJax.typeset();
 
