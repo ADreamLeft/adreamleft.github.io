@@ -31,8 +31,11 @@ window.onload = function () {
         })
         .then(md => {
             container.innerHTML = marked.parse(md);
-            MathJax.typeset();
-
+            if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+                MathJax.startup.promise.then(() => {
+                    MathJax.typeset();
+                });
+            }
             // 生成目录
             if (!tocList) {
                 console.error("目录容器 toc-list 找不到");
