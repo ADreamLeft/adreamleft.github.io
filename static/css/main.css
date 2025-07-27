@@ -63,6 +63,12 @@ section .main-body{
     background: linear-gradient(45deg, #f0f0f0, #f1f1f1) !important;
 }
 
+.markdown-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
 
 
 .on-top {
