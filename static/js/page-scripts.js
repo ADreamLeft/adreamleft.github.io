@@ -30,12 +30,13 @@ window.onload = function () {
             return response.text();
         })
         .then(md => {
+            marked.setOptions({
+            gfm: false,
+            smartypants: false,
+            });
             container.innerHTML = marked.parse(md);
-            if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
-                MathJax.startup.promise.then(() => {
-                    MathJax.typeset();
-                });
-            }
+            MathJax.typeset();
+
             // 生成目录
             if (!tocList) {
                 console.error("目录容器 toc-list 找不到");
