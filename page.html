@@ -65,6 +65,9 @@
                 // (document.getElementsByTagName('base').length === 0) ? '' : String(document.location).replace(/#.*$/, ''),
                 formatError:               // function called when TeX syntax errors occur
                     (jax, err) => jax.formatError(err)
+            },
+            loader: {
+                load: ['[tex]/ams']   // ✅ 加载 AMS 模块
             }
         };
     </script>
