@@ -1,6 +1,6 @@
 window.onload = function () {
     marked.setOptions({
-        gfm: false,
+        gfm: true,
         smartypants: false,
     });
 
@@ -36,36 +36,49 @@ window.onload = function () {
         })
         .then(md => {
             container.innerHTML = marked.parse(md);
-            MathJax.typeset();
+            MathJax.typesetPromise()
+                .then(() => {
+                    // 生成目录
+                    if (!tocList) {
+                        console.error("目录容器 toc-list 找不到");
+                        return;
+                    }
+                    tocList.innerHTML = '';
 
-            // 生成目录
-            if (!tocList) {
-                console.error("目录容器 toc-list 找不到");
-                return;
-            }
-            tocList.innerHTML = '';
+                    const headers = container.querySelectorAll('h1, h2');
+                    headers.forEach((header, index) => {
+                        if (!header.id) {
+                            header.id = 'header-' + index;
+                        }
+                        const li = document.createElement('li');
+                        li.style.marginLeft = header.tagName === 'H2' ? '20px' : '0px';
 
-            const headers = container.querySelectorAll('h1, h2');
-            headers.forEach((header, index) => {
-                if (!header.id) {
-                    header.id = 'header-' + index;
-                }
-                const li = document.createElement('li');
-                li.style.marginLeft = header.tagName === 'H2' ? '20px' : '0px';
+                        const a = document.createElement('a');
+                        a.href = '#' + header.id;
+                        a.textContent = header.textContent;
+                        a.style.cursor = 'pointer';
+                        a.style.color = '#007bff';
+                        a.style.textDecoration = 'none';
 
-                const a = document.createElement('a');
-                a.href = '#' + header.id;
-                a.textContent = header.textContent;
-                a.style.cursor = 'pointer';
-                a.style.color = '#007bff';
-                a.style.textDecoration = 'none';
+                        a.addEventListener('mouseover', () => { a.style.textDecoration = 'underline'; });
+                        a.addEventListener('mouseout', () => { a.style.textDecoration = 'none'; });
 
-                a.addEventListener('mouseover', () => { a.style.textDecoration = 'underline'; });
-                a.addEventListener('mouseout', () => { a.style.textDecoration = 'none'; });
+                        li.appendChild(a);
+                        tocList.appendChild(li);
+                    });
 
-                li.appendChild(a);
-                tocList.appendChild(li);
-            });
+                    // 这里加一个 MathJax 渲染测试用的元素，确认 \mathbb 是否有效
+                    const testDiv = document.createElement('div');
+                    testDiv.id = 'test-math';
+                    testDiv.style.marginTop = '40px';
+                    testDiv.innerHTML = `测试 MathJax 渲染：$$\\mathbb{R}$$`;
+                    document.body.appendChild(testDiv);
+
+                    return MathJax.typesetPromise([testDiv]);
+                })
+                .catch(err => {
+                    console.error("MathJax 渲染错误:", err);
+                });
         })
         .catch(err => {
             container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
