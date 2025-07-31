@@ -71,7 +71,7 @@ window.onload = function () {
                     const testDiv = document.createElement('div');
                     testDiv.id = 'test-math';
                     testDiv.style.marginTop = '40px';
-                    testDiv.innerHTML = `测试 MathJax 渲染：$$\\mathbb{R}$$`;
+                    testDiv.innerHTML = `测试 MathJax 渲染：$$\\max_{\\theta_{g}} \\mathbb{E}_{z \\sim p(z)} \\log D_{\\theta_{d}}(G_{\\theta_{g}}(z))$$`;
                     document.body.appendChild(testDiv);
 
                     return MathJax.typesetPromise([testDiv]);
